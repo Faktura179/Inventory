@@ -3,5 +3,9 @@
 ################################################################################
 
 /.vs
-/Inventory/.vs/Inventory/v17
+/Inventory/.vs
 /Inventory/Inventory/obj
+/Inventory/Inventory/bin
+/Inventory/Inventory/Properties
+/Inventory/Inventory/Database/db_Inventory_log.ldf
+/Inventory/Inventory/Database/db_Inventory.mdf
