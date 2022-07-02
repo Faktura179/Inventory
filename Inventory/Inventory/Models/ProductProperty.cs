@@ -8,5 +8,8 @@ namespace Inventory.Models
         public int ProductPropertyId { get; set; }
         public string Name { get; set; } = null!;
         public string Value { get; set; } = null!;
+        public int ProductId { get; set; }
+
+        public virtual Product Product { get; set; } = null!;
     }
 }
