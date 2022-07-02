@@ -36,6 +36,12 @@ namespace Inventory.Data
                 entity.Property(e => e.Price).HasColumnType("money");
 
                 entity.Property(e => e.Sku).HasMaxLength(20);
+
+                entity.HasOne(d => d.ProductProperty)
+                    .WithMany(p => p.Products)
+                    .HasForeignKey(d => d.ProductPropertyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Products_ProductProperties");
             });
 
             modelBuilder.Entity<ProductProperty>(entity =>
@@ -45,12 +51,6 @@ namespace Inventory.Data
                 entity.Property(e => e.Name).HasMaxLength(255);
 
                 entity.Property(e => e.Value).HasMaxLength(255);
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.ProductProperties)
-                    .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ProdcutProperties_Products");
             });
 
             modelBuilder.Entity<Warehouse>(entity =>

@@ -7,7 +7,6 @@ namespace Inventory.Models
     {
         public Product()
         {
-            ProductProperties = new HashSet<ProductProperty>();
             WarehouseProducts = new HashSet<WarehouseProduct>();
         }
 
@@ -15,8 +14,9 @@ namespace Inventory.Models
         public string Name { get; set; } = null!;
         public string Sku { get; set; } = null!;
         public decimal Price { get; set; }
+        public int ProductPropertyId { get; set; }
 
-        public virtual ICollection<ProductProperty> ProductProperties { get; set; }
+        public virtual ProductProperty ProductProperty { get; set; } = null!;
         public virtual ICollection<WarehouseProduct> WarehouseProducts { get; set; }
     }
 }
