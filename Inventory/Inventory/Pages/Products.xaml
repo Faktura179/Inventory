@@ -73,5 +73,8 @@
 
         </ComboBox>
         <Button Grid.Column="1" Content="Dodaj produkt" HorizontalAlignment="Right" Margin="10,0,20,10" VerticalAlignment="Bottom" FontSize="18" Padding="5" Click="Button_Click"/>
+        <TextBlock HorizontalAlignment="Right" Margin="20,20,20,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" Height="24" Width="81" Grid.Column="1">
+            <Hyperlink NavigateUri="Warehouses.xaml">Magazyny</Hyperlink>
+        </TextBlock>
     </Grid>
 </Page>

@@ -1,0 +1,80 @@
+﻿<Page x:Class="Inventory.Pages.Warehouses"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Inventory.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Magazyny"
+      Background="white">
+
+    <Grid x:Name="Grid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="337*"/>
+            <RowDefinition Height="297*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230*"/>
+            <ColumnDefinition Width="570*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="WarehouseGrid" Margin="10,13,10,10" ItemsSource="{Binding}" Grid.ColumnSpan="2" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ProductId" Binding="{Binding Product.ProductId}" Width="*"/>
+                <DataGridTemplateColumn Header="Product" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock>
+                                    <Run Text="{Binding Product.Name}"></Run><Run Text=";"></Run>
+                                    <Run Text="{Binding Product.Sku}"></Run>
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Price" Binding="{Binding Product.Price}" Width="*"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                
+                <DataGridTemplateColumn Header="Usuń" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Usuń" Click="ButtonDelete_Click">
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Edytuj" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Edytuj" Click="ButtonEdit_Click">
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Content="Dodaj Produkt do magazynu" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Grid.ColumnSpan="2"/>
+
+        <Label Content="Magazyn" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top" Height="35" Width="200" FontSize="18"/>
+        <ComboBox x:Name="WarehouseCb" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="200" FontSize="18" Grid.Column="1" Height="30" ItemsSource="{Binding}" SelectionChanged="WarehouseCb_SelectionChanged">
+
+        </ComboBox>
+
+        <Label Content="Ilość" HorizontalAlignment="Left" Margin="20,150,0,0" VerticalAlignment="Top" Height="30" Width="200" FontSize="18"/>
+        <TextBox x:Name="QuantityTb" HorizontalAlignment="Left" Margin="10,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="18" Grid.Column="1" Height="30" PreviewTextInput="QuantityTb_PreviewTextInput" DataObject.Pasting="TextBoxPasting"/>
+
+        <Label Content="Produkt" HorizontalAlignment="Left" Margin="20,110,0,0" VerticalAlignment="Top" Height="30" Width="200" FontSize="18"/>
+        <ComboBox x:Name="ProductCb" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" Width="200" FontSize="18" Grid.Column="1" Height="30" ItemsSource="{Binding}">
+
+        </ComboBox>
+
+        <Button Grid.Column="1" Content="Dodaj produkt" HorizontalAlignment="Right" Margin="10,0,20,10" VerticalAlignment="Bottom" FontSize="18" Padding="5" Click="ButtonAdd_Click"/>
+        <TextBlock HorizontalAlignment="Right" Margin="20,20,20,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" Height="24" Width="81" Grid.Column="1">
+            <Hyperlink NavigateUri="Products.xaml">Produkty</Hyperlink>
+        </TextBlock>
+        
+    </Grid>
+</Page>
