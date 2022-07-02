@@ -30,7 +30,7 @@ namespace Inventory.Repositories
 
         internal List<WarehouseProduct> GetByWarehouseId(int warehouseId)
         {
-            return _dbset.Where(x => x.WarehouseId == warehouseId).ToList();
+            return _dbset.Include(x => x.Product).Where(x => x.WarehouseId == warehouseId).ToList();
         }
 
         public void Remove(WarehouseProduct product)
@@ -40,7 +40,7 @@ namespace Inventory.Repositories
 
         public WarehouseProduct GetById(int productId, int warehouseId)
         {
-            return _dbset.FirstOrDefault(x => x.ProductId == productId && warehouseId == x.WarehouseId);
+            return _dbset.Include(x => x.Product).FirstOrDefault(x => x.ProductId == productId && warehouseId == x.WarehouseId);
         }
     }
 }

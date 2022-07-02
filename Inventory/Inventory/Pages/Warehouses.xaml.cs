@@ -57,6 +57,35 @@ namespace Inventory.Pages
             WarehouseCb.DataContext = _warehousesViewModel.GetAllWarehouses().Select(x => new KeyValuePair<int, string>(x.WarehouseId, $"{x.Name}, {x.City}"));
         }
 
+        public Warehouses(int warehouseId)
+        {
+            InitializeComponent();
+
+            _context = new InventoryContext();
+            Init();
+
+            ProductCb.DisplayMemberPath = "Value";
+            ProductCb.SelectedValuePath = "Key";
+            ProductCb.DataContext = _productsViewModel.GetAllProducts().Select(x => new KeyValuePair<int, string>(x.ProductId, $"{x.Name}; {x.Sku}; {x.Price.ToString("C")}"));
+
+            List<KeyValuePair<int, string>> warehouses = _warehousesViewModel.GetAllWarehouses().Select(x => new KeyValuePair<int, string>(x.WarehouseId, $"{x.Name}, {x.City}")).ToList();
+            KeyValuePair<int, string> selectedWarehouse = warehouses.First(x => x.Key == warehouseId);
+            WarehouseCb.DisplayMemberPath = "Value";
+            WarehouseCb.SelectedValuePath = "Key";
+            WarehouseCb.DataContext = warehouses;
+            WarehouseCb.SelectedIndex = warehouses.IndexOf(selectedWarehouse);
+        }
+
+        private void Init()
+        {
+            _productRepository = new ProductRepository(_context);
+            _warehouseRepository = new WarehouseRepository(_context);
+            _warehouseProductRepository = new WarehouseProductRepository(_context);
+            _productsViewModel = new ProductsViewModel(_productRepository);
+            _warehousesViewModel = new WarehousesViewModel(_warehouseRepository);
+            _warehouseProductsViewModel = new WarehouseProductsViewModel(_warehouseProductRepository);
+        }
+
         private static bool IsTextAllowed(string text)
         {
             return !_regex.IsMatch(text);
@@ -87,6 +116,9 @@ namespace Inventory.Pages
         {
             try
             {
+                _context.Dispose();
+                _context = new InventoryContext();
+                Init();
                 WarehouseProduct product = new WarehouseProduct()
                 {
                     WarehouseId = (int)WarehouseCb.SelectedValue,
@@ -128,12 +160,12 @@ namespace Inventory.Pages
 
         private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
-            //WarehouseProduct product = ((FrameworkElement)sender).DataContext as WarehouseProduct;
+            WarehouseProduct product = ((FrameworkElement)sender).DataContext as WarehouseProduct;
 
-            //if (product is not null)
-            //{
-            //    this.NavigationService.Navigate(new EditWarehouseProduct(product.ProductId, product.WarehouseId));
-            //}
+            if (product is not null)
+            {
+                this.NavigationService.Navigate(new EditWarehouseProduct(product.ProductId, product.WarehouseId));
+            }
         }
 
         private void WarehouseCb_SelectionChanged(object sender, SelectionChangedEventArgs e)

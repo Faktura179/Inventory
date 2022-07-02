@@ -20,7 +20,7 @@ namespace Inventory.Repositories
 
         public List<Product> GetAll()
         {
-            return _dbset.ToList();
+            return _dbset.Include(x => x.ProductProperty).ToList();
         }
 
         public void Add(Product product)
@@ -35,7 +35,7 @@ namespace Inventory.Repositories
 
         public Product GetById(int productId)
         {
-            return _dbset.FirstOrDefault(x => x.ProductId == productId);
+            return _dbset.Include(x => x.ProductProperty).FirstOrDefault(x => x.ProductId == productId);
         }
     }
 }
