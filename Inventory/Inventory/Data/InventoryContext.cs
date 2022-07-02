@@ -46,8 +46,6 @@ namespace Inventory.Data
 
             modelBuilder.Entity<ProductProperty>(entity =>
             {
-                entity.Property(e => e.ProductPropertyId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name).HasMaxLength(255);
 
                 entity.Property(e => e.Value).HasMaxLength(255);
