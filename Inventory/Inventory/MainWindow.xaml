@@ -7,61 +7,7 @@
         mc:Ignorable="d"
         Title="Inventory - Products" Height="650" Width="800">
 
-    <Grid x:Name="Grid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="337*"/>
-            <RowDefinition Height="297*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="230*"/>
-            <ColumnDefinition Width="570*"/>
-        </Grid.ColumnDefinitions>
-
-        <DataGrid x:Name="ProductsGrid" Margin="10,13,10,10" ItemsSource="{Binding}" Grid.ColumnSpan="2" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ProductId" Binding="{Binding ProductId}" Width="*"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Sku" Binding="{Binding Sku}" Width="*"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
-                <DataGridTemplateColumn Header="Property" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <TextBlock>
-                                    <Run Text="{Binding ProductProperty.Name}"></Run>
-                                    <Run Text="-"></Run>
-                                    <Run Text="{Binding ProductProperty.Value}"></Run>
-                                </TextBlock>
-                            </Grid>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Usuń" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Usuń" Click="ButtonDelete_Click">
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <Label Content="Dodaj Produkt" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="Bold"/>
-
-        <Label Content="Nazwa" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top" Height="30" Width="200" FontSize="18"/>
-        <TextBox x:Name="ProductNameTb" HorizontalAlignment="Left" Margin="10,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="18" Grid.Column="1" Height="30"/>
-
-        <Label Content="Sku" HorizontalAlignment="Left" Margin="20,110,0,0" VerticalAlignment="Top" Height="30" Width="200" FontSize="18"/>
-        <TextBox x:Name="ProductSkuTb" HorizontalAlignment="Left" Margin="10,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="18" Grid.Column="1" Height="30"/>
-
-        <Label Content="Cena" HorizontalAlignment="Left" Margin="20,150,0,0" VerticalAlignment="Top" Height="30" Width="200" FontSize="18"/>
-        <TextBox x:Name="ProductPriceTb" HorizontalAlignment="Left" Margin="10,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="18" Grid.Column="1" Height="30" PreviewTextInput="ProductPriceTb_PreviewTextInput" DataObject.Pasting="TextBoxPasting"/>
-
-        <Label Content="Właściwość" HorizontalAlignment="Left" Margin="20,190,0,0" VerticalAlignment="Top" Height="30" Width="200" FontSize="18"/>
-        <ComboBox x:Name="ProductPropertyCb" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Width="200" FontSize="18" Grid.Column="1" Height="30" ItemsSource="{Binding}">
-            
-        </ComboBox>
-        <Button Grid.Column="1" Content="Dodaj produkt" HorizontalAlignment="Right" Margin="10,0,20,10" VerticalAlignment="Bottom" FontSize="18" Padding="5" Click="Button_Click"/>
-    </Grid>
+    <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden">
+        
+    </Frame>
 </Window>
